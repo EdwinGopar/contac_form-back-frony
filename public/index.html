@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Football Game | Landing Page</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="style.css">
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+</head>
+<body>
+
+  <div class="hero">
+    <div class="overlay">
+      <header>
+        <h1 class="logo">FOOTBALL<span>GAME</span></h1>
+        <nav>
+          <a href="#about">Nosotros</a>
+          <a href="#contact">Contacto</a>
+          <a href="#" id="authBtn" class="btn secondary" style="padding: 6px 12px;">Iniciar Sesión</a>
+        </nav>
+      </header>
+
+      <div class="hero-content">
+        <h2>¡Vive el fútbol como nunca!</h2>
+        <p>Conéctate con la comunidad futbolera, comparte tu pasión y únete al juego.</p>
+        <div class="hero-buttons">
+          <a href="#contact" class="btn primary">Comenzar</a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <section id="about" class="section dark">
+    <h2>¿Quiénes somos?</h2>
+    <p>Somos una comunidad apasionada por el fútbol que impulsa partidos locales, torneos y experiencias únicas para jugadores y fans.</p>
+  </section>
+
+  <section id="contact" class="section form-section">
+    <h2>Contáctanos</h2>
+    <form id="contactForm">
+      <input type="text" name="name" placeholder="Nombre completo" required>
+      <input type="email" name="email" placeholder="Correo electrónico" required>
+      <input type="tel" name="phone" placeholder="Teléfono" required>
+      <textarea name="message" placeholder="Escribe tu mensaje..." required></textarea>
+      <button type="submit" id="submitBtn">Enviar mensaje</button>
+    </form>
+  </section>
+
+  <footer>
+    <p>© 2025 Football Game. Todos los derechos reservados.</p>
+  </footer>
+
+  <!-- 🔒 Modal de Login/Register (inicialmente oculto) -->
+  <div id="authModal" style="
+    display: none;
+    position: fixed;
+    z-index: 999;
+    top: 0; left: 0;
+    width: 100vw;
+    height: 100vh;
+    background-color: rgba(0,0,0,0.8);
+    align-items: center;
+    justify-content: center;
+  ">
+    <div style="
+      background: #222;
+      padding: 40px 30px;
+      border-radius: 10px;
+      max-width: 400px;
+      width: 90%;
+      text-align: center;
+    ">
+      <h2 style="color: #00ff91;">Bienvenido</h2>
+      <p style="margin: 10px 0 20px; color: #ccc;">¿Qué deseas hacer?</p>
+      <div style="display: flex; flex-direction: column; gap: 15px;">
+        <a href="login.html" style="
+          padding: 12px;
+          background-color: #00ff91;
+          color: #000;
+          border-radius: 6px;
+          font-weight: bold;
+          text-decoration: none;
+        ">Iniciar sesión</a>
+        <a href="register.html" style="
+          padding: 12px;
+          background-color: transparent;
+          color: #00ff91;
+          border: 2px solid #00ff91;
+          border-radius: 6px;
+          font-weight: bold;
+          text-decoration: none;
+        ">Crear cuenta</a>
+        <button onclick="document.getElementById('authModal').style.display='none'" style="
+          background: none;
+          border: none;
+          color: #999;
+          margin-top: 15px;
+          cursor: pointer;
+        ">Cancelar</button>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    // Mostrar el modal solo cuando se hace clic en el botón
+    document.getElementById("authBtn").addEventListener("click", function (e) {
+      e.preventDefault();
+      document.getElementById("authModal").style.display = "flex";
+    });
+
+    // Envío de formulario con alerta
+    document.getElementById("contactForm").addEventListener("submit", function (e) {
+      e.preventDefault();
+
+      // Aquí podrías hacer una petición a un backend con fetch/axios si lo deseas
+
+      Swal.fire({
+        title: '¡Mensaje enviado!',
+        text: 'Gracias por contactarnos. Te responderemos pronto.',
+        icon: 'success',
+        confirmButtonColor: '#00ff91'
+      });
+
+      // Limpiar formulario
+      this.reset();
+    });
+  </script>
+
+</body>
+</html>
