@@ -64,7 +64,7 @@ async function cambiarEstado(id, nuevoEstado) {
   const token = localStorage.getItem("token");
 
   try {
-    const res = await fetch(`http://localhost:3001/api/contact/${id}`, {
+    const res = await fetch(`https://contact-form-production-a17c.up.railway.app/api/contact/${id}`, {
       method: "PUT",
       headers: {
         "Content-Type": "application/json",

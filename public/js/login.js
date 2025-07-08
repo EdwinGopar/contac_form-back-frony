@@ -5,7 +5,7 @@ document.getElementById("loginForm").addEventListener("submit", async function (
   const password = document.getElementById("password").value.trim();
 
   try {
-    const res = await fetch("http://localhost:3001/api/auth/login", {
+ const res = await fetch("https://contact-form-production-a17c.up.railway.app/api/contact", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ email, password }) // ✅ Ya usamos la variable correcta
