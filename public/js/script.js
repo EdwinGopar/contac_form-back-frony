@@ -1,5 +1,4 @@
 const API_URL = 'https://contact-form-production-a17c.up.railway.app/api/contact';
-
 const form = document.getElementById('contactForm');
 const container = document.getElementById('messagesContainer');
 const submitBtn = document.getElementById('submitBtn');

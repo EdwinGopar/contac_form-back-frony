@@ -10,7 +10,8 @@ document.addEventListener("DOMContentLoaded", async () => {
   }
 
   try {
-    const res = await fetch("http://localhost:3001/api/contact", {
+    const res = await fetch("https://contact-form-production-a17c.up.railway.app/api/contact", {
+
       headers: { Authorization: `Bearer ${token}` }
     });
     const data = await res.json();
