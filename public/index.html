@@ -50,7 +50,7 @@
     <p>© 2025 Football Game. Todos los derechos reservados.</p>
   </footer>
 
-  <!-- 🔒 Modal de Login/Register (inicialmente oculto) -->
+  <!-- 🔒 Modal de Login/Register -->
   <div id="authModal" style="
     display: none;
     position: fixed;
@@ -101,28 +101,58 @@
     </div>
   </div>
 
+  <!-- 🧠 JS FUNCIONAL -->
   <script>
-    // Mostrar el modal solo cuando se hace clic en el botón
     document.getElementById("authBtn").addEventListener("click", function (e) {
       e.preventDefault();
       document.getElementById("authModal").style.display = "flex";
     });
 
-    // Envío de formulario con alerta
-    document.getElementById("contactForm").addEventListener("submit", function (e) {
+    document.getElementById("contactForm").addEventListener("submit", async function (e) {
       e.preventDefault();
 
-      // Aquí podrías hacer una petición a un backend con fetch/axios si lo deseas
+      const form = e.target;
+      const data = {
+        name: form.name.value.trim(),
+        email: form.email.value.trim(),
+        phone: form.phone.value.trim(),
+        message: form.message.value.trim()
+      };
 
-      Swal.fire({
-        title: '¡Mensaje enviado!',
-        text: 'Gracias por contactarnos. Te responderemos pronto.',
-        icon: 'success',
-        confirmButtonColor: '#00ff91'
-      });
+      try {
+        const response = await fetch('/api/contact', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify(data)
+        });
 
-      // Limpiar formulario
-      this.reset();
+        // Verificar si la respuesta tiene contenido JSON
+        const isJson = response.headers.get('content-type')?.includes('application/json');
+        const result = isJson ? await response.json() : {};
+
+        if (response.ok) {
+          Swal.fire({
+            title: '¡Mensaje enviado!',
+            text: result.message || 'Gracias por contactarnos. Te responderemos pronto.',
+            icon: 'success',
+            confirmButtonColor: '#00ff91'
+          });
+          form.reset();
+        } else {
+          throw new Error(result.error || 'Error al enviar el mensaje');
+        }
+
+      } catch (error) {
+        console.error('❌ Error:', error);
+        Swal.fire({
+          title: 'Error',
+          text: error.message || 'No se pudo enviar el mensaje',
+          icon: 'error',
+          confirmButtonColor: '#ff4d4d'
+        });
+      }
     });
   </script>
 
